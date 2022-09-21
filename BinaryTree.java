@@ -30,6 +30,13 @@ public class BinaryTree<K extends Comparable <K>> {
 	private int getSizeRecursive(MyBinaryNode<K> rootData) {
 		return rootData == null ? 0 : 1 + this.getSizeRecursive(rootData.left)+this.getSizeRecursive(rootData.right);
 	}
+	
+	private boolean searchKey(MyBinaryNode<K> rootData, K key) {
+		if(rootData == null) return false;
+		if(rootData.key == key) return true;
+		if(searchKey(rootData.left, key)) return true;
+		return searchKey(rootData.right, key);
+	}
 	public static void main(String args[]) {
 	BinaryTree<Integer> binary = new BinaryTree<>();
 	binary.add(56);
@@ -48,5 +55,10 @@ public class BinaryTree<K extends Comparable <K>> {
 	int bstSize = binary.getSize();
 	System.out.println("Size of binary tree is : "+bstSize);
 	
+	if(binary.searchKey(null, 63)) {
+		System.out.println("63 not found in binary search tree");
+	} else {
+		System.out.println("63 found in binary search tree");
+	}
 	}
 }
